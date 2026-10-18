@@ -1,0 +1,31 @@
+name: web
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - name: Generated API types match specs/
+        run: |
+          npm run api:generate
+          git diff --exit-code -- src/api/generated
+      - run: npm run lint
+      - run: npm test
+      - run: npm run build
+      - uses: actions/upload-artifact@v4
+        with:
+          name: web-dist
+          path: dist/
+
+  # The e2e tests need the whole stack (dev-env). They run nightly in the
+  # dev-env repo's workflow, not here.
