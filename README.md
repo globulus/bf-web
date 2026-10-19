@@ -24,17 +24,17 @@ catalog-service. By default they're expected where dev-env puts them
 | `npm run build` | type-check and build to `dist/` |
 | `npm test` | Vitest unit tests (jsdom) |
 | `npm run lint` | ESLint |
-| `npm run api:generate` | regenerate `src/api/generated/` from `specs/` |
+| `npm run api:generate` | regenerate `src/api/generated/` from `openapi/` |
 | `npm run e2e` | Playwright against a running stack |
 
 ## API types
 
-`specs/orders.json` and `specs/catalog.json` are copies of the backends' OpenAPI specs
+`openapi/orders.json` and `openapi/catalog.json` are copies of the backends' OpenAPI specs
 (CI artifacts `orders-openapi` and `catalog-openapi`). `npm run api:generate` turns them
 into types with [openapi-typescript](https://openapi-ts.dev); requests go through
 [openapi-fetch](https://openapi-ts.dev/openapi-fetch/), see `src/api/client.ts`.
 
-The generated files are committed. CI fails if they don't match `specs/`.
+The generated files are committed. CI fails if they don't match `openapi/`.
 
 Heads-up: springdoc doesn't mark response fields as required, so every field in the
 generated types is optional. Expect a lot of `?.`.

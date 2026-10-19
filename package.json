@@ -14,7 +14,7 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "e2e": "playwright test",
-    "api:generate": "openapi-typescript specs/orders.json -o src/api/generated/orders.ts && openapi-typescript specs/catalog.json -o src/api/generated/catalog.ts"
+    "api:generate": "openapi-typescript openapi/orders.json -o src/api/generated/orders.ts && openapi-typescript openapi/catalog.json -o src/api/generated/catalog.ts"
   },
   "dependencies": {
     "openapi-fetch": "^0.17.0",

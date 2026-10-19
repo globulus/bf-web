@@ -22,3 +22,6 @@ dist-ssr
 .DS_Store
 *.suo
 *.sw?
+
+# Test reports (vitest --reporter=junit)
+/reports/
